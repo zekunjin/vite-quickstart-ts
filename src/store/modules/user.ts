@@ -11,7 +11,7 @@ const user = {
 
   state: {
     id: '',
-    username: 'USERNAME',
+    username: '',
     mobile: ''
   },
 
