@@ -1,6 +1,6 @@
 import axios from 'axios'
 import LocalAuthService from '@/services/local/auth'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { ACCESS_TOKEN } from '@/constants'
 
 interface IAxiosResponseError {
   response: {

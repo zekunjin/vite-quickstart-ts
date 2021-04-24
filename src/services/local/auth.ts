@@ -1,5 +1,5 @@
 import ls from '@/utils/storage'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { ACCESS_TOKEN } from '@/constants'
 
 export default class LocalAuthService {
   static getToken(): string {

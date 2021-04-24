@@ -1,16 +1,8 @@
-import { createStore } from 'vuex'
-import getters from './getters'
-import user, { IUserState } from './modules/user'
+import user from './modules/user'
 
-export interface RootState {
-  user: IUserState
+export interface IStoreModule<S, A> {
+  state: S
+  actions?: A
 }
 
-const modules = { user }
-
-const store = createStore({
-  modules,
-  getters
-})
-
-export default store
+export { user }

@@ -1,34 +1,32 @@
-import { Commit } from 'vuex'
+import { reactive } from 'vue'
+import { IStoreModule } from '@/store'
 
 export interface IUserState {
-  id: string
   username: string
-  mobile: string
+  avatar?: string
+  mobile?: string
 }
 
-const user = {
-  namespaced: true,
+export interface IUserActions {
+  login: Function
+}
 
-  state: {
-    id: '',
-    username: '',
-    mobile: ''
-  },
+export default (): IStoreModule<IUserState, IUserActions> => {
+  const state = reactive({
+    username: 'DEFAULT'
+  })
 
-  mutations: {
-    SET_ID(state: IUserState, id: string) {
-      state.id = id
-    }
-  },
-
-  actions: {
-    login({ commit }: { commit: Commit }): Promise<void> {
+  const actions = {
+    login(): Promise<void> {
       return new Promise((resolve, reject) => {
-        commit('SET_ID', 'ID')
+        state.username = 'AFTER LOGIN USERNAME'
         resolve()
       })
     }
   }
-}
 
-export default user
+  return {
+    state,
+    actions
+  }
+}

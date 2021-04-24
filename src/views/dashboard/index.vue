@@ -1,37 +1,38 @@
 <template>
-  <div>{{ store.state.user }}</div>
+  <div>username: {{ state.username }}</div>
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
+
+  <button @click="actions.login">login</button>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+import { useInject } from '@/utils/provider'
+import { user as userStore } from '@/store'
 import AjaxAuthService from '@/services/ajax/auth'
 
 export default defineComponent({
   name: 'dashboard',
 
   setup() {
-    const store = useStore()
     const router = useRouter()
     const { name: routeName } = useRoute()
+    const { state, actions } = useInject(userStore)
 
     onMounted(() => {
       AjaxAuthService.login({ username: 'USERNAME', password: 'PASSWORD' })
         .then((res) => {})
-        .catch((err) => {
-          store.dispatch('user/login')
-        })
+        .catch((err) => {})
     })
 
     const naviAccount = () => {
       router.push({ name: 'account' })
     }
 
-    return { store, routeName, naviAccount }
+    return { routeName, state, actions, naviAccount }
   }
 })
 </script>
