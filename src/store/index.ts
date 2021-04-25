@@ -1,6 +1,6 @@
 import user from './modules/user'
 
-export interface IStoreModule<S, A> {
+export interface IStoreModule<S, A = { [func: string]: Function }> {
   state: S
   actions?: A
 }
