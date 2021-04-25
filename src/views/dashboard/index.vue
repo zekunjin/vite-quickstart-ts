@@ -4,12 +4,13 @@
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
 
-  <button @click="actions.login">login</button>
+  <button @click="login">login</button>
+  <button @click="actions.login">set token</button>
   <button @click="actions.logout">logout</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useInject } from '@/utils/provider'
 import { user as userStore } from '@/store'
@@ -23,17 +24,17 @@ export default defineComponent({
     const { name: routeName } = useRoute()
     const { state, actions } = useInject(userStore)
 
-    onMounted(() => {
+    const login = () => {
       AjaxAuthService.login({ username: 'USERNAME', password: 'PASSWORD' })
         .then((res) => {})
         .catch((err) => {})
-    })
+    }
 
     const naviAccount = () => {
       router.push({ name: 'account' })
     }
 
-    return { routeName, state, actions, naviAccount }
+    return { routeName, state, actions, login, naviAccount }
   }
 })
 </script>
