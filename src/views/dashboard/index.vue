@@ -5,6 +5,7 @@
   <div @click="naviAccount">javascript link account</div>
 
   <button @click="actions.login">login</button>
+  <button @click="actions.logout">logout</button>
 </template>
 
 <script lang="ts">

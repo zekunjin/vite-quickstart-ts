@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 import { IStoreModule } from '@/store'
+import LocalAuthService from '@/services/local/auth'
 
 export interface IUserState {
   username: string
@@ -9,6 +10,7 @@ export interface IUserState {
 
 export interface IUserActions {
   login: Function
+  logout: Function
 }
 
 export default (): IStoreModule<IUserState, IUserActions> => {
@@ -20,8 +22,14 @@ export default (): IStoreModule<IUserState, IUserActions> => {
     login(): Promise<void> {
       return new Promise((resolve, reject) => {
         state.username = 'AFTER LOGIN USERNAME'
+        LocalAuthService.setToken('TOKEN')
         resolve()
       })
+    },
+
+    logout() {
+      state.username = 'AFTER LOGOUT USERNAME'
+      LocalAuthService.removeToken()
     }
   }
 

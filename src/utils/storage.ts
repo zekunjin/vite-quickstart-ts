@@ -1,9 +1,9 @@
 export default {
-  set(key: string, value: string): void {
+  set(key: string, value: string) {
     localStorage.setItem(key, value)
   },
 
-  get(key: string): string {
+  get(key: string) {
     return localStorage.getItem(key) || ''
   },
 
