@@ -1,14 +1,14 @@
 import { reactive } from 'vue'
-import { IStoreModule } from '@/store'
+import { IState, IActions, IStoreModule } from '@/store'
 import LocalAuthService from '@/services/local/auth'
 
-export interface IUserState {
+export interface IUserState extends IState {
   username: string
   avatar?: string
   mobile?: string
 }
 
-export interface IUserActions {
+export interface IUserActions extends IActions {
   login: Function
   logout: Function
 }
