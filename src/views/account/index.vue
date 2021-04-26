@@ -1,18 +1,21 @@
 <template>
-  <div>{{ state }}</div>
+  <suspense>
+    <hello-world />
+    <template #fallback>
+      <span>loading...</span>
+    </template>
+  </suspense>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useInject } from '@/utils/provider'
-import userStore from '@/store/modules/user'
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default defineComponent({
   name: 'account',
 
-  setup() {
-    const { state } = useInject(userStore)
-    return { state }
+  components: {
+    HelloWorld
   }
 })
 </script>
