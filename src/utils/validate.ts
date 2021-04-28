@@ -1,5 +1,5 @@
 export interface IRuleItem {
-  type?: 'string' | 'number'
+  type?: 'string' | 'number' | 'array'
   required?: boolean
   max?: number
   min?: number
@@ -11,30 +11,37 @@ export interface IRules {
 }
 
 export const checkRequired = (value: any, required: boolean = false): boolean =>
-  required ? required && value : true
+  !required ? true : String(value).length > 0
 
 export const checkcCount = (
-  value: number,
+  value: number | string | [],
   min: number = 0,
   max?: number
 ): boolean => {
-  const vMin = value > min
-  const vMax = max ? value < max : true
+  const length = typeof value === 'number' ? value : value.length
+  const vMin = length > min
+  const vMax = max ? length < max : true
   return vMin && vMax
 }
 
 export const validate: { [func: string]: Function } = {
-  string(rule: IRuleItem, value: string): boolean {
-    return (
-      checkRequired(value, rule.required) &&
-      checkcCount(value.length, rule.min, rule.max)
-    )
-  },
-  number(rule: IRuleItem, value: number) {
+  common(rule: IRuleItem, value: string): boolean {
     return (
       checkRequired(value, rule.required) &&
       checkcCount(value, rule.min, rule.max)
     )
+  },
+
+  string(rule: IRuleItem, value: string): boolean {
+    return true
+  },
+
+  number(rule: IRuleItem, value: number) {
+    return true
+  },
+
+  array(rule: IRuleItem, value: []) {
+    return true
   }
 }
 
@@ -44,6 +51,7 @@ export default (rules: IRules) => (source: { [key: string]: any }) => {
       const itemValue = source[key]
       const itemRules = rules[key]
       itemRules.forEach((element) => {
+        validate.common(element, itemValue) &&
         validate[element.type || 'string'](element, itemValue)
           ? resolve(true)
           : reject(element.message)
