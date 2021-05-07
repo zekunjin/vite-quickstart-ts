@@ -6,7 +6,7 @@ export const Token = (
   descriptor: PropertyDescriptor
 ) => {
   const func = descriptor.value
-  descriptor.value = () =>
-    LocalAuthService.getToken() ? func() : Promise.reject()
+  descriptor.value = (...args: any[]) =>
+    LocalAuthService.getToken() ? func(...args) : Promise.reject()
   return descriptor
 }

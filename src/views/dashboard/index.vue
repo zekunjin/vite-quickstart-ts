@@ -26,7 +26,9 @@ export default defineComponent({
 
     const login = () => {
       AjaxAuthService.login({ username: 'USERNAME', password: 'PASSWORD' })
-        .then((res) => {})
+        .then((res) => {
+          console.log(res.data)
+        })
         .catch((err) => {})
     }
 
