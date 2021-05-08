@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import { Token } from '@/decorators/auth'
-import { Cache } from '@/decorators/ajax'
+import { Cache, IRequestOptions } from '@/decorators/ajax'
 
 export const LOGIN = '/shuffling/list'
 
@@ -12,7 +12,7 @@ export interface ILoginParams {
 export default class AjaxAuthService {
   @Token
   @Cache()
-  static login(data: ILoginParams) {
+  static login(data: ILoginParams, options?: IRequestOptions) {
     return request({
       url: LOGIN,
       method: 'get',

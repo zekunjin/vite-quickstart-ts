@@ -1,26 +1,33 @@
-interface ICache {
+interface ICacheItem {
   value: any
   createTime: number
   timeout: number
 }
 
-const dataCache = new Map<string, ICache>()
+export interface IRequestOptions {
+  refresh: boolean
+}
 
-export const Cache = (timeout: number = 1000 * 60 * 5) => (
+const dataCache = new Map<string, ICacheItem>()
+
+export const Cache = (timeout: number = 1000 * 60) => (
   target: any,
   propertyKey: string,
   descriptor: PropertyDescriptor
 ) => {
-  const func = descriptor.value
+  const func: Function = descriptor.value
   descriptor.value = (...args: any[]) => {
     return new Promise((resolve, reject) => {
       const current = new Date().getTime()
-      const cache = dataCache.get(propertyKey) as ICache
+      const [params, options] = args
+      const { refresh } = (options as IRequestOptions) || {}
+      const key = JSON.stringify({ propertyKey, params })
+      const cache = dataCache.get(key) as ICacheItem
       const isTimeout = !cache || cache.createTime + cache.timeout < current
-      if (!cache || !cache.value || isTimeout) {
+      if (!cache || !cache.value || isTimeout || refresh) {
         func(...args)
           .then((res: any) => {
-            dataCache.set(propertyKey, {
+            dataCache.set(key, {
               value: res,
               createTime: current,
               timeout
@@ -28,7 +35,7 @@ export const Cache = (timeout: number = 1000 * 60 * 5) => (
             resolve(res)
           })
           .catch((err: any) => {
-            dataCache.delete(propertyKey)
+            dataCache.delete(key)
             reject(err)
           })
       } else {

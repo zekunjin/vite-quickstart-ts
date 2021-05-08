@@ -25,9 +25,12 @@ export default defineComponent({
     const { state, actions } = useInject(userStore)
 
     const login = () => {
-      AjaxAuthService.login({ username: 'USERNAME', password: 'PASSWORD' })
-        .then((res) => {
-          console.log(res.data)
+      AjaxAuthService.login(
+        { username: 'USERNAME', password: 'PASSWORD' },
+        { refresh: false }
+      )
+        .then(({ data }) => {
+          console.log(data)
         })
         .catch((err) => {})
     }
