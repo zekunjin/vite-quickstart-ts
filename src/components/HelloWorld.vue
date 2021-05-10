@@ -14,7 +14,9 @@ export default defineComponent({
   setup() {
     const { state } = useInject(userStore)
 
-    return { state }
+    return new Promise((resolve) => {
+      resolve({ state })
+    })
   }
 })
 </script>
