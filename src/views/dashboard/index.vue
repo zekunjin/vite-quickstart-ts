@@ -5,8 +5,8 @@
   <div @click="naviAccount">javascript link account</div>
 
   <button @click="login">login</button>
-  <button @click="actions.login">set token</button>
-  <button @click="actions.logout">logout</button>
+  <button @click="actions.login()">set token</button>
+  <button @click="actions.logout()">logout</button>
 </template>
 
 <script lang="ts">

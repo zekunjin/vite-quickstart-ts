@@ -14,11 +14,7 @@ export default defineComponent({
   setup() {
     const { state } = useInject(userStore)
 
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ state })
-      }, 1000)
-    })
+    return { state }
   }
 })
 </script>

@@ -10,7 +10,7 @@ export interface IActions {
 
 export interface IStoreModule<S = IState, A = IActions> {
   state: S
-  actions?: A
+  actions: A
 }
 
 export { user }

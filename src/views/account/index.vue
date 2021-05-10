@@ -1,10 +1,11 @@
 <template>
-  <suspense>
-    <hello-world />
+  <hello-world />
+  <!-- <suspense>
+    
     <template #fallback>
       <span>loading...</span>
     </template>
-  </suspense>
+  </suspense> -->
 </template>
 
 <script lang="ts">
