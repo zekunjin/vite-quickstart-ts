@@ -1,10 +1,20 @@
 version: '0'
 services:
-  nginx:
-    image: nginx
-    container_name: nginx
+  # nginx:
+  #   image: nginx
+  #   container_name: nginx
+  #   ports:
+  #     - 5000:5000
+  #   volumes:
+  #     - /Users/jinzekun/Documents/github/vite-quickstart-ts/nginx.conf:/etc/nginx/nginx.conf
+  #     - /Users/jinzekun/Documents/github/vite-quickstart-ts/dist:/data/vite-quickstart-ts
+  node:
+    image: node
+    container_name: node
+    working_dir: /project/vite-quickstart-ts
+    command: bash -c "npm run dev"
+    tty: true
     ports:
-      - 5000:5000
+      - 3000:3000
     volumes:
-      - /Users/jinzekun/Documents/github/vite-quickstart-ts/nginx.conf:/etc/nginx/nginx.conf
-      - /Users/jinzekun/Documents/github/vite-quickstart-ts/dist:/data/vite-quickstart-ts
+      - /Users/jinzekun/Documents/github/vite-quickstart-ts:/project/vite-quickstart-ts
