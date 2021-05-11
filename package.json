@@ -5,6 +5,7 @@
     "dev": "vite",
     "dev:docker": "docker compose up node",
     "build": "vue-tsc --noEmit && vite build",
+    "build:docker": "npm run build && docker compose up nginx",
     "serve": "vite preview"
   },
   "dependencies": {
