@@ -3,6 +3,7 @@
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
+  <div>date format: {{ $filters.moment('2020.01.01') }}</div>
 
   <button @click="login">login</button>
   <button @click="actions.login()">set token</button>
