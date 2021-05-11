@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import authRoutes from './modules/authRoutes'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -10,7 +11,9 @@ const routes: RouteRecordRaw[] = [
     path: '/account',
     name: 'account',
     component: () => import('@/views/account/index.vue')
-  }
+  },
+
+  ...authRoutes
 ]
 
 const router = createRouter({
