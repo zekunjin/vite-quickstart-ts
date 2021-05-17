@@ -1,4 +1,4 @@
-import { RouteView } from '@/views/layouts'
+import RouteView from '@/layouts/RouteView.vue'
 
 export default [
   {
