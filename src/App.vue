@@ -12,9 +12,3 @@ export default defineComponent({
   setup: () => useProvide(userStore)
 })
 </script>
-
-<style>
-#app {
-  font-size: 24px;
-}
-</style>
