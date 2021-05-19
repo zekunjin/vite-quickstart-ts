@@ -1,8 +1,7 @@
 module.exports = {
   plugins: {
-    'postcss-pxtorem': {
-      rootValue: 192,
-      propList: ['*']
+    'postcss-px-to-viewport': {
+      viewportWidth: 1920
     }
   }
 }
