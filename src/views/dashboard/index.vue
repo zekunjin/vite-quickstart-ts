@@ -1,5 +1,7 @@
 <template>
-  <div>username: {{ state.username }}</div>
+  <div class="user-container">
+    <span class="username">username: {{ state.username }}</span>
+  </div>
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
@@ -44,3 +46,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.user-container .username {
+  color: var(--blue);
+}
+</style>
