@@ -15,12 +15,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useInject } from '@/utils/provider'
 import { user as userStore } from '@/store'
 import AjaxAuthService from '@/services/ajax/auth'
-import { register } from '@/libs/micro-frontend'
 
 export default defineComponent({
   name: 'dashboard',
@@ -29,18 +28,6 @@ export default defineComponent({
     const router = useRouter()
     const { name: routeName } = useRoute()
     const { state, actions } = useInject(userStore)
-
-    onMounted(async () => {
-      await nextTick()
-      register([
-        {
-          name: 'micro',
-          entry: '//localhost:8080',
-          path: '/micro',
-          container: '#micro-vue'
-        }
-      ])
-    })
 
     const login = () => {
       AjaxAuthService.login(
