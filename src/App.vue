@@ -9,7 +9,11 @@ import store from '@/store'
 
 export default defineComponent({
   name: 'App',
-  setup: () => useProvide(store.user)
+  setup: () => {
+    for (const module in store) {
+      useProvide(store[module])
+    }
+  }
 })
 </script>
 
