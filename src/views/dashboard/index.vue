@@ -18,7 +18,7 @@
 import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useInject } from '@/utils/provider'
-import { user as userStore } from '@/store'
+import store from '@/store'
 import AjaxAuthService from '@/services/ajax/auth'
 
 export default defineComponent({
@@ -27,7 +27,7 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const { name: routeName } = useRoute()
-    const { state, actions } = useInject(userStore)
+    const { state, actions } = useInject(store.user)
 
     const login = () => {
       AjaxAuthService.login(

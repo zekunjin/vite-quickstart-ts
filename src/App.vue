@@ -5,11 +5,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useProvide } from '@/utils/provider'
-import userStore from '@/store/modules/user'
+import store from '@/store'
 
 export default defineComponent({
   name: 'App',
-  setup: () => useProvide(userStore)
+  setup: () => useProvide(store.user)
 })
 </script>
 

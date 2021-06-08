@@ -6,13 +6,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useInject } from '@/utils/provider'
-import userStore from '@/store/modules/user'
+import store from '@/store'
 
 export default defineComponent({
   name: 'HelloWorld',
 
   setup() {
-    const { state } = useInject(userStore)
+    const { state } = useInject(store.user)
 
     return { state }
   }
