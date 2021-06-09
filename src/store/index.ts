@@ -1,12 +1,5 @@
 import { FunctionalStore } from '@/utils/provider'
-
-const modules: { [key: string]: IStoreModule } = {}
-const modulesFiles = import.meta.globEager('./modules/*.ts')
-
-for (const modulePath in modulesFiles) {
-  const moduleName = modulePath.replace(/^\.\/modules\/(.*)\.\w+$/, '$1')
-  modules[moduleName] = modulesFiles[modulePath].default as IStoreModule
-}
+import user from './modules/user'
 
 export interface IState {
   [state: string]: any
@@ -16,10 +9,11 @@ export interface IActions {
   [func: string]: Function
 }
 
-export interface IStoreModule<S = IState, A = IActions>
-  extends FunctionalStore<IStoreModule> {
+export interface IStoreModule<S = IState, A = IActions> {
   state: S
   actions: A
 }
 
-export default modules
+export default { user } as {
+  [key: string]: FunctionalStore<IStoreModule<IState, IActions>>
+}
