@@ -30,14 +30,12 @@ export default defineComponent({
     const { state, actions } = useInject(store.user)
 
     const login = () => {
-      AjaxAuthService.login(
-        { username: 'USERNAME', password: 'PASSWORD' },
-        { refresh: false }
-      )
-        .then(({ data }) => {
-          console.log(data)
-        })
-        .catch((err) => {})
+      AjaxAuthService.login({
+        username: 'USERNAME',
+        password: 'PASSWORD'
+      }).then(({ data }) => {
+        console.log(data)
+      })
     }
 
     const naviAccount = () => {

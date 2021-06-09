@@ -10,38 +10,34 @@ export interface IRequestOptions {
 
 const dataCache = new Map<string, ICacheItem>()
 
-export const Cache = (timeout: number = 1000 * 60) => (
-  target: any,
-  propertyKey: string,
-  descriptor: PropertyDescriptor
-) => {
-  const func: Function = descriptor.value
-  descriptor.value = (...args: any[]) => {
-    return new Promise((resolve, reject) => {
-      const current = new Date().getTime()
-      const [params, options] = args
-      const { refresh } = (options as IRequestOptions) || {}
-      const key = JSON.stringify({ propertyKey, params })
-      const cache = dataCache.get(key) as ICacheItem
-      const isTimeout = !cache || cache.createTime + cache.timeout < current
-      if (!cache || !cache.value || isTimeout || refresh) {
-        func(...args)
-          .then((res: any) => {
-            dataCache.set(key, {
-              value: res,
-              createTime: current,
-              timeout
+export const Cache =
+  (timeout: number = 1000 * 60) =>
+  (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const func: Function = descriptor.value
+    descriptor.value = (params: any): Promise<any> => {
+      return new Promise((resolve, reject) => {
+        const current = new Date().getTime()
+        const key = JSON.stringify({ propertyKey, params })
+        const cache = dataCache.get(key) as ICacheItem
+        const isTimeout = !cache || cache.createTime + cache.timeout < current
+        if (!cache || !cache.value || isTimeout) {
+          func(params)
+            .then((res: any) => {
+              dataCache.set(key, {
+                value: res,
+                createTime: current,
+                timeout
+              })
+              resolve(res)
             })
-            resolve(res)
-          })
-          .catch((err: any) => {
-            dataCache.delete(key)
-            reject(err)
-          })
-      } else {
-        resolve(cache.value)
-      }
-    })
+            .catch((err: any) => {
+              dataCache.delete(key)
+              reject(err)
+            })
+        } else {
+          resolve(cache.value)
+        }
+      })
+    }
+    return descriptor
   }
-  return descriptor
-}
