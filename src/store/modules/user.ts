@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { IState, IActions, IStoreModule } from '@/store'
+import { IState, IActions, IModule } from '@/store'
 import LocalAuthService from '@/services/local/auth'
 
 export interface IUserState extends IState {
@@ -13,7 +13,7 @@ export interface IUserActions extends IActions {
   logout: Function
 }
 
-export default (): IStoreModule<IUserState, IUserActions> => {
+export default (): IModule<IUserState, IUserActions> => {
   const state = reactive({
     username: 'DEFAULT'
   })
