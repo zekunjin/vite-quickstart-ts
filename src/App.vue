@@ -9,11 +9,7 @@ import store from '@/store'
 
 export default defineComponent({
   name: 'App',
-  setup: () => {
-    for (const module in store) {
-      useProvide(store[module])
-    }
-  }
+  setup: () => Object.values(store).forEach(useProvide)
 })
 </script>
 

@@ -20,9 +20,9 @@ export interface IStore {
 const modules: IStore = {}
 const modulesFiles = import.meta.globEager('./modules/*.ts')
 
-for (const modulePath in modulesFiles) {
+Object.keys(modulesFiles).forEach((modulePath) => {
   const moduleName = modulePath.replace(/^\.\/modules\/(.*)\.\w+$/, '$1')
   modules[moduleName] = modulesFiles[modulePath].default
-}
+})
 
 export default modules
