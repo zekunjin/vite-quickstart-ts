@@ -1,5 +1,6 @@
 import { createI18n, LocaleMessages, VueMessageType } from 'vue-i18n'
 import { ZH_CN, EN_US } from '@/constants'
+import LocalConfigService from '@/services/local/config'
 import zhCN from './lang/zh-CN'
 import enUS from './lang/en-US'
 
@@ -8,12 +9,12 @@ const messages: LocaleMessages<VueMessageType> = {
   [EN_US]: { ...enUS }
 }
 
-const i18n = createI18n({
+const defaultLang = LocalConfigService.getLanguage() || EN_US
+
+export default createI18n({
   legacy: false,
-  locale: ZH_CN,
-  fallbackLocale: ZH_CN,
+  locale: defaultLang,
+  fallbackLocale: defaultLang,
   globalInjection: true,
   messages
 })
-
-export default i18n
