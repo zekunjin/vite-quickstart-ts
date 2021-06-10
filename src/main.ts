@@ -7,6 +7,4 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-const app = createApp(App)
-app.config.globalProperties.$filters = filters
-app.use(router).mount('#app')
+createApp(App).use(router).use(filters).mount('#app')
