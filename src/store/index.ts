@@ -13,16 +13,4 @@ export interface IModule<S = IState, A = IActions> {
   actions: A
 }
 
-// export interface IStore {
-//   [key: string]: FunctionalStore<IModule>
-// }
-
-// const modules: IStore = {}
-// const modulesFiles = import.meta.globEager('./modules/*.ts')
-
-// Object.keys(modulesFiles).forEach((modulePath) => {
-//   const moduleName = modulePath.replace(/^\.\/modules\/(.*)\.\w+$/, '$1')
-//   modules[moduleName] = modulesFiles[modulePath].default
-// })
-
 export default { user }
