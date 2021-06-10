@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import filters from './core/filters'
-import i18n from './locals'
+import i18n from './locales'
 
 router.beforeEach((to, from, next) => {
   next()
