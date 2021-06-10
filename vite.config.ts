@@ -14,6 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': require('path').resolve(__dirname, './src'),
+      // replace the vue-i18n esm bundler with cjs module
       'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
     }
   }
