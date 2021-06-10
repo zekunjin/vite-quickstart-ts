@@ -11,7 +11,7 @@
   <button @click="actions.login()">set token</button>
   <button @click="actions.logout()">logout</button>
 
-  <div id="micro-vue" />
+  <div>i18n: {{ $t('message') }}</div>
 </template>
 
 <script lang="ts">
