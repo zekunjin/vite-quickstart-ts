@@ -9,6 +9,11 @@ export interface ILocaleMessages {
   [key: string]: string | ILocaleMessages
 }
 
+export interface II18nOptions {
+  locale: string
+  messages: ILocaleMessages
+}
+
 const messages: ILocaleMessages = {
   [ZH_CN]: { ...zhCN },
   [EN_US]: { ...enUS }
@@ -16,32 +21,30 @@ const messages: ILocaleMessages = {
 
 const defaultLang = LocalConfigService.getLanguage() || EN_US
 
-class I18n {
-  public locale = ''
-  public messages = {}
+export class I18n {
+  public locale: string = ''
+  public messages: ILocaleMessages = {}
 
-  constructor({
-    locale,
-    messages
-  }: {
-    locale: string
-    messages: ILocaleMessages
-  }) {
+  constructor({ locale, messages }: II18nOptions) {
     this.locale = locale
     this.messages = messages
   }
 
   install(app: App<Element>) {
-    app.config.globalProperties.$t = this.t
+    app.config.globalProperties.$t = (keyOptions: string) => {
+      return optionalChaining(
+        this.messages,
+        this.locale,
+        ...keyOptions.split('.')
+      )
+    }
   }
 
-  t(keyOptions: string) {
-    return optionalChaining(
-      this.messages,
-      this.locale,
-      ...keyOptions.split('.')
-    )
+  setLocale(locale: string) {
+    this.locale = locale
   }
 }
 
-export default new I18n({ locale: defaultLang, messages })
+export const createI18n = (options: II18nOptions) => new I18n(options)
+
+export default createI18n({ locale: defaultLang, messages })
