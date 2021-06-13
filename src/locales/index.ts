@@ -1,7 +1,7 @@
-import { App } from 'vue'
+import { App, Ref, ref } from 'vue'
 import { optionalChaining } from '@/utils/common'
 import { ZH_CN, EN_US } from '@/constants'
-import LocalConfigService from '@/services/local/config'
+import LocalConfigService from '@/services/local/app'
 import zhCN from './lang/zh-CN'
 import enUS from './lang/en-US'
 
@@ -22,11 +22,11 @@ const messages: ILocaleMessages = {
 const defaultLang = LocalConfigService.getLanguage() || EN_US
 
 export class I18n {
-  public locale: string = ''
+  public locale: Ref<string> = ref('')
   public messages: ILocaleMessages = {}
 
   constructor({ locale, messages }: II18nOptions) {
-    this.locale = locale
+    this.locale.value = locale
     this.messages = messages
   }
 
@@ -34,14 +34,14 @@ export class I18n {
     app.config.globalProperties.$t = (keyOptions: string) => {
       return optionalChaining(
         this.messages,
-        this.locale,
+        this.locale.value,
         ...keyOptions.split('.')
       )
     }
   }
 
   setLocale(locale: string) {
-    this.locale = locale
+    this.locale.value = locale
   }
 }
 

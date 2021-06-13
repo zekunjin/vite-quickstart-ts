@@ -1,6 +1,6 @@
 <template>
   <div class="user-container">
-    <span class="username">username: {{ state.username }}</span>
+    <span class="username">username: {{ userState.username }}</span>
   </div>
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
@@ -8,8 +8,10 @@
   <div>date format: {{ $filters.moment('2020.01.01') }}</div>
 
   <button @click="login">login</button>
-  <button @click="actions.login()">set token</button>
-  <button @click="actions.logout()">logout</button>
+  <button @click="userActions.login()">set token</button>
+  <button @click="userActions.logout()">logout</button>
+  <button @click="setLanguage(EN_US)">set en-us lang</button>
+  <button @click="setLanguage(ZH_CN)">set zh-cn lang</button>
 
   <div>i18n: {{ $t('message') }}</div>
 </template>
@@ -20,6 +22,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useInject } from '@/utils/provider'
 import store from '@/store'
 import AjaxAuthService from '@/services/ajax/auth'
+import { EN_US, ZH_CN } from '@/constants'
 
 export default defineComponent({
   name: 'dashboard',
@@ -27,7 +30,8 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const { name: routeName } = useRoute()
-    const { state, actions } = useInject(store.user)
+    const { state: userState, actions: userActions } = useInject(store.user)
+    const { actions: appActions } = useInject(store.app)
 
     const login = () => {
       AjaxAuthService.login({
@@ -42,7 +46,20 @@ export default defineComponent({
       router.push({ name: 'account' })
     }
 
-    return { routeName, state, actions, login, naviAccount }
+    const setLanguage = (locale: string) => {
+      appActions.setLanguage(locale)
+    }
+
+    return {
+      EN_US,
+      ZH_CN,
+      routeName,
+      userState,
+      userActions,
+      login,
+      naviAccount,
+      setLanguage
+    }
   }
 })
 </script>

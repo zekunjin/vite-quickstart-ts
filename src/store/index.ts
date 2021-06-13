@@ -1,3 +1,4 @@
+import app from './modules/app'
 import user from './modules/user'
 
 export interface IState {
@@ -13,4 +14,4 @@ export interface IModule<S = IState, A = IActions> {
   actions: A
 }
 
-export default { user }
+export default { app, user }
