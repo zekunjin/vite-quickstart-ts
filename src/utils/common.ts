@@ -1,3 +1,5 @@
+import { DARK, LIGHT } from '@/constants'
+
 export const optionalChaining = (
   obj: { [key: string]: any },
   ...rest: string[]
@@ -8,4 +10,9 @@ export const optionalChaining = (
     tmp = tmp?.[name]
   }
   return tmp
+}
+
+export const getOSTheme = (): string => {
+  const darkMql = window.matchMedia('(prefers-color-scheme: dark)')
+  return darkMql.matches ? DARK : LIGHT
 }

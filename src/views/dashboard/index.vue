@@ -10,8 +10,8 @@
   <button @click="login">login</button>
   <button @click="userActions.login()">set token</button>
   <button @click="userActions.logout()">logout</button>
-  <button @click="setLanguage(EN_US)">set en-us lang</button>
-  <button @click="setLanguage(ZH_CN)">set zh-cn lang</button>
+  <button @click="appActions.setLanguage(EN_US)">set en-us lang</button>
+  <button @click="appActions.setLanguage(ZH_CN)">set zh-cn lang</button>
 
   <div>{{ $t('message', { msg: 'i18n' }) }}</div>
 </template>
@@ -46,19 +46,15 @@ export default defineComponent({
       router.push({ name: 'account' })
     }
 
-    const setLanguage = (locale: string) => {
-      appActions.setLanguage(locale)
-    }
-
     return {
       EN_US,
       ZH_CN,
       routeName,
       userState,
       userActions,
+      appActions,
       login,
-      naviAccount,
-      setLanguage
+      naviAccount
     }
   }
 })
