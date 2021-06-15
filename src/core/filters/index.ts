@@ -1,11 +1,11 @@
 import { App } from 'vue'
 
 interface IFilterModules {
-  [key: string]: { (...args: any): string | void }
+  [key: string]: (...args: any) => string | void
 }
 
 interface IFilters extends IFilterModules {
-  install: { (app: App<Element>): void }
+  install: (app: App<Element>) => void
 }
 
 const modules: IFilterModules = {}

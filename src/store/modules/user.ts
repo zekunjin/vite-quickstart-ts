@@ -9,8 +9,8 @@ export interface IUserState extends IState {
 }
 
 export interface IUserActions extends IActions {
-  login: { (): Promise<void> }
-  logout: { (): void }
+  login: () => Promise<void>
+  logout: () => void
 }
 
 export default (): IModule<IUserState, IUserActions> => {

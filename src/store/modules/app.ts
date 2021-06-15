@@ -10,8 +10,8 @@ export interface IAppState extends IState {
 }
 
 export interface IAppActions extends IActions {
-  setLanguage: { (locale: string): void }
-  setTheme: { (theme: string): void }
+  setLanguage: (locale: string) => void
+  setTheme: (theme: string) => void
 }
 
 export default (): IModule<IAppState, IAppActions> => {
