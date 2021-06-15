@@ -12,16 +12,16 @@ export const optionalChaining = (
   return tmp
 }
 
-export const getOSTheme = (cb: Function): string => {
+export const getOSTheme = (cb?: Function): string => {
   const darkMql = window.matchMedia('(prefers-color-scheme: dark)')
   const lightMql = window.matchMedia('(prefers-color-scheme: light)')
   const handleDarkMqlChange = (e: MediaQueryListEvent) => {
-    if (e.matches) cb(DARK)
+    if (e.matches) cb && cb(DARK)
   }
   const handleLightMqlChange = (e: MediaQueryListEvent) => {
-    if (e.matches) cb(LIGHT)
+    if (e.matches) cb && cb(LIGHT)
   }
-  if (darkMql.addEventListener) {
+  if (cb && darkMql.addEventListener) {
     darkMql.addEventListener('change', handleDarkMqlChange)
     lightMql.addEventListener('change', handleLightMqlChange)
   }
