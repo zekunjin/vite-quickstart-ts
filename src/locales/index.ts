@@ -14,6 +14,10 @@ export interface II18nOptions {
   messages: ILocaleMessages
 }
 
+export interface ICustomMessages {
+  [key: string]: string
+}
+
 const messages: ILocaleMessages = {
   [ZH_CN]: { ...zhCN },
   [EN_US]: { ...enUS }
@@ -31,12 +35,22 @@ export class I18n {
   }
 
   install(app: App<Element>) {
-    app.config.globalProperties.$t = (keyOptions: string) => {
-      return optionalChaining(
+    app.config.globalProperties.$t = (
+      keyOptions: string,
+      customOptions?: ICustomMessages
+    ) => {
+      let message = optionalChaining(
         this.messages,
         this.locale.value,
         ...keyOptions.split('.')
-      )
+      ) as string
+      if (customOptions) {
+        Object.keys(customOptions).forEach((key) => {
+          const value = customOptions[key]
+          message = message.replaceAll(`{${key}}`, value)
+        })
+      }
+      return message
     }
   }
 

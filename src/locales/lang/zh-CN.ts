@@ -1,3 +1,3 @@
 export default {
-  message: '消息'
+  message: '消息: {msg}'
 }

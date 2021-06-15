@@ -13,7 +13,7 @@
   <button @click="setLanguage(EN_US)">set en-us lang</button>
   <button @click="setLanguage(ZH_CN)">set zh-cn lang</button>
 
-  <div>i18n: {{ $t('message') }}</div>
+  <div>{{ $t('message', { msg: 'i18n' }) }}</div>
 </template>
 
 <script lang="ts">

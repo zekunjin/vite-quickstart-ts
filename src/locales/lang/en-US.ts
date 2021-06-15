@@ -1,3 +1,3 @@
 export default {
-  message: 'Message'
+  message: 'Message: {msg}'
 }
