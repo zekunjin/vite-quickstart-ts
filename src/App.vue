@@ -9,7 +9,10 @@ import store from '@/store'
 
 export default defineComponent({
   name: 'App',
-  setup: () => Object.values(store).forEach(useProvide)
+  setup: () => {
+    useProvide(store.app)
+    useProvide(store.user)
+  }
 })
 </script>
 
