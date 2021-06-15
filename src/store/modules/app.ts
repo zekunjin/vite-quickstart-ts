@@ -7,6 +7,7 @@ import LocalAppService from '@/services/local/app'
 
 export interface IAppState extends IState {
   language: string
+  theme: string
 }
 
 export interface IAppActions extends IActions {
@@ -17,7 +18,7 @@ export interface IAppActions extends IActions {
 export default (): IModule<IAppState, IAppActions> => {
   const state = reactive({
     language: ZH_CN,
-    theme: getOSTheme()
+    theme: getOSTheme((e: string) => (state.theme = e))
   })
 
   const actions = {

@@ -6,6 +6,7 @@
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
   <div>date format: {{ $filters.moment('2020.01.01') }}</div>
+  <div>theme: {{ appState.theme }}</div>
 
   <button @click="login">login</button>
   <button @click="userActions.login()">set token</button>
@@ -31,7 +32,7 @@ export default defineComponent({
     const router = useRouter()
     const { name: routeName } = useRoute()
     const { state: userState, actions: userActions } = useInject(store.user)
-    const { actions: appActions } = useInject(store.app)
+    const { state: appState, actions: appActions } = useInject(store.app)
 
     const login = () => {
       AjaxAuthService.login({
@@ -51,6 +52,7 @@ export default defineComponent({
       ZH_CN,
       routeName,
       userState,
+      appState,
       userActions,
       appActions,
       login,
