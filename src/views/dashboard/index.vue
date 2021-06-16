@@ -1,18 +1,22 @@
 <template>
-  <div class="user-container">
-    <span class="username">username: {{ userState.username }}</span>
-  </div>
+  <div>username: {{ userState.username }}</div>
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
   <div>date format: {{ $filters.moment('2020.01.01') }}</div>
   <div>color scheme: {{ appState.colorScheme }}</div>
+  <div class="primary-color">
+    <span>primary color</span>
+  </div>
 
   <button @click="login">login</button>
   <button @click="userActions.login()">set token</button>
   <button @click="userActions.logout()">logout</button>
   <button @click="appActions.setLanguage(EN_US)">set en-us lang</button>
   <button @click="appActions.setLanguage(ZH_CN)">set zh-cn lang</button>
+  <button @click="appActions.setPrimaryColor('#e83e8c')">
+    set primary color
+  </button>
 
   <div>{{ $t('message', { msg: 'i18n' }) }}</div>
 </template>
@@ -63,9 +67,9 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped>
-.user-container {
-  & .username {
-    color: var(--blue);
+.primary-color {
+  & span {
+    color: var(--primary-color);
   }
 }
 </style>

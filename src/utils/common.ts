@@ -27,3 +27,15 @@ export const getOSTheme = (cb?: Function): string => {
   }
   return darkMql.matches ? DARK : LIGHT
 }
+
+export const setCSSVar = (key: string, value: string): void => {
+  document.documentElement.style.setProperty(`--${key}`, value)
+}
+
+export const getCSSVar = (key: string): string => {
+  return document.documentElement.style.getPropertyValue(`--${key}`).trim()
+}
+
+export const removeCSSVar = (key: string): void => {
+  document.documentElement.style.removeProperty(`--${key}`)
+}

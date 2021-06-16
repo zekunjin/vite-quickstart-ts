@@ -7,6 +7,7 @@ export const EN_US = 'en-US'
 export const DARK = 'dark'
 export const LIGHT = 'light'
 
+export const PRIMARY_COLOR = 'primary-color'
 export const BLUE = 'blue'
 export const INDIGO = 'indigo'
 export const PURPLE = 'purple'

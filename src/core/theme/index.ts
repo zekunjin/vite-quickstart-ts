@@ -1,10 +1,10 @@
 import colors from './colors'
+import { setCSSVar } from '@/utils/common'
 
 export default {
   install() {
     Object.keys(colors).forEach((key: string) => {
-      const value: string = colors[key]
-      document.documentElement.style.setProperty(`--${key}`, value)
+      setCSSVar(key, colors[key])
     })
   }
 }
