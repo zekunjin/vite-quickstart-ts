@@ -62,8 +62,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-.user-container .username {
-  color: var(--blue);
+<style lang="postcss" scoped>
+.user-container {
+  & .username {
+    color: var(--blue);
+  }
 }
 </style>
