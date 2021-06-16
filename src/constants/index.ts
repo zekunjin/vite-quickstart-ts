@@ -1,6 +1,21 @@
 export const ACCESS_TOKEN = 'Access-Token'
+
 export const LANGUAGE = 'language'
 export const ZH_CN = 'zh-CN'
 export const EN_US = 'en-US'
+
 export const DARK = 'dark'
 export const LIGHT = 'light'
+
+export const BLUE = 'blue'
+export const INDIGO = 'indigo'
+export const PURPLE = 'purple'
+export const PINK = 'pink'
+export const RED = 'red'
+export const ORANGE = 'orange'
+export const YELLOW = 'yellow'
+export const GREEN = 'green'
+export const TEAL = 'teal'
+export const CYAN = 'cyan'
+export const WHITE = 'white'
+export const GREY = 'gray'

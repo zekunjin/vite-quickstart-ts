@@ -6,7 +6,7 @@
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
   <div>date format: {{ $filters.moment('2020.01.01') }}</div>
-  <div>theme: {{ appState.theme }}</div>
+  <div>color scheme: {{ appState.colorScheme }}</div>
 
   <button @click="login">login</button>
   <button @click="userActions.login()">set token</button>
