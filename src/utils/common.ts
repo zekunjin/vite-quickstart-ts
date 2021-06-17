@@ -1,5 +1,11 @@
 import { DARK, LIGHT } from '@/constants'
 
+interface ICSSVarOptions {
+  element: HTMLElement
+}
+
+const HTMLBody = document.body
+
 export const optionalChaining = (
   obj: { [key: string]: any },
   ...rest: string[]
@@ -28,14 +34,21 @@ export const getOSTheme = (cb?: Function): string => {
   return darkMql.matches ? DARK : LIGHT
 }
 
-export const setCSSVar = (key: string, value: string): void => {
-  document.documentElement.style.setProperty(`--${key}`, value)
+export const setCSSVar = (
+  key: string,
+  value: string,
+  options?: ICSSVarOptions
+): void => {
+  const { element = HTMLBody } = options || {}
+  element.style.setProperty(`--${key}`, value)
 }
 
-export const getCSSVar = (key: string): string => {
-  return document.documentElement.style.getPropertyValue(`--${key}`).trim()
+export const getCSSVar = (key: string, options?: ICSSVarOptions): string => {
+  const { element = HTMLBody } = options || {}
+  return element.style.getPropertyValue(`--${key}`).trim()
 }
 
-export const removeCSSVar = (key: string): void => {
-  document.documentElement.style.removeProperty(`--${key}`)
+export const removeCSSVar = (key: string, options?: ICSSVarOptions): void => {
+  const { element = HTMLBody } = options || {}
+  element.style.removeProperty(`--${key}`)
 }

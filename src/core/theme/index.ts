@@ -4,7 +4,7 @@ import { setCSSVar } from '@/utils/common'
 export default {
   install() {
     Object.keys(colors).forEach((key: string) => {
-      setCSSVar(key, colors[key])
+      setCSSVar(key, colors[key], { element: document.documentElement })
     })
   }
 }

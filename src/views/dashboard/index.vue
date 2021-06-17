@@ -9,14 +9,21 @@
     <span>primary color</span>
   </div>
 
+  <div>
+    <div
+      v-for="item in colors"
+      :key="item"
+      class="color-select-block"
+      :style="{ backgroundColor: item }"
+      @click="appActions.setPrimaryColor(item)"
+    />
+  </div>
+
   <button @click="login">login</button>
   <button @click="userActions.login()">set token</button>
   <button @click="userActions.logout()">logout</button>
   <button @click="appActions.setLanguage(EN_US)">set en-us lang</button>
   <button @click="appActions.setLanguage(ZH_CN)">set zh-cn lang</button>
-  <button @click="appActions.setPrimaryColor('#e83e8c')">
-    set primary color
-  </button>
 
   <div>{{ $t('message', { msg: 'i18n' }) }}</div>
 </template>
@@ -28,6 +35,7 @@ import { useInject } from '@/utils/provider'
 import store from '@/store'
 import AjaxAuthService from '@/services/ajax/auth'
 import { EN_US, ZH_CN } from '@/constants'
+import colors from '@/core/theme/colors'
 
 export default defineComponent({
   name: 'dashboard',
@@ -59,6 +67,7 @@ export default defineComponent({
       appState,
       userActions,
       appActions,
+      colors,
       login,
       naviAccount
     }
@@ -70,6 +79,14 @@ export default defineComponent({
 .primary-color {
   & span {
     color: var(--primary-color);
+    font-weight: 1000;
   }
+}
+
+.color-select-block {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  cursor: pointer;
 }
 </style>
