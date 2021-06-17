@@ -1,5 +1,6 @@
 <template>
-  <div>username: {{ userState.username }}</div>
+  <div>user state: {{ userState }}</div>
+  <div>app state: {{ appState }}</div>
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>

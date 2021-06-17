@@ -26,10 +26,12 @@ export default (): IModule<IAppState, IAppActions> => {
     setLanguage(language: string): void {
       LocalAppService.setLanguage(language)
       i18n.setLocale(language)
+      state.language = language
     },
 
     setPrimaryColor(color: string) {
       LocalAppService.setPrimaryColor(color)
+      state.primaryColor = color
     }
   }
 
