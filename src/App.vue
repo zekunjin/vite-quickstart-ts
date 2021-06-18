@@ -5,13 +5,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useProvide } from '@/utils/provider'
-import store from '@/store'
+import store, { IModule } from '@/store'
 
 export default defineComponent({
   name: 'App',
   setup: () => {
-    useProvide(store.app)
-    useProvide(store.user)
+    Object.values(store).forEach((e: () => IModule) => {
+      useProvide(e)
+    })
   }
 })
 </script>
