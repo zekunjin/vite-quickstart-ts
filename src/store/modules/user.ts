@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { IState, IActions, IModule } from '@/store'
+import { IState, IActions, IModule } from '@/utils/provider'
 import LocalAuthService from '@/services/local/auth'
 
 export interface IUserState extends IState {

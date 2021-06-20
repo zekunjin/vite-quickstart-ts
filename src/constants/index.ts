@@ -1,5 +1,9 @@
 export const ACCESS_TOKEN = 'Access-Token'
 
+export const DESKTOP = 'desktop'
+export const TABLET = 'tablet'
+export const MOBILE = 'mobile'
+
 export const LANGUAGE = 'language'
 export const ZH_CN = 'zh-CN'
 export const EN_US = 'en-US'

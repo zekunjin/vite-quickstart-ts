@@ -1,12 +1,13 @@
 import { reactive } from 'vue'
-import { IState, IActions, IModule } from '@/store'
 import i18n from '@/locales'
-import { ZH_CN, BLUE } from '@/constants/index'
-import { getOSTheme, getCSSVar } from '@/utils/common'
+import { IState, IActions, IModule } from '@/utils/provider'
+import { getOSTheme, getCSSVar, getDevice } from '@/utils/common'
 import LocalAppService from '@/services/local/app'
+import { ZH_CN, BLUE } from '@/constants/index'
 
 export interface IAppState extends IState {
   language: string
+  device: string
   colorScheme: string
   primaryColor: string
 }
@@ -18,6 +19,7 @@ export interface IAppActions extends IActions {
 export default (): IModule<IAppState, IAppActions> => {
   const state = reactive({
     language: ZH_CN,
+    device: getDevice((e: string) => (state.device = e)),
     colorScheme: getOSTheme((e: string) => (state.colorScheme = e)),
     primaryColor: LocalAppService.getPrimaryColor() || getCSSVar(BLUE)
   })

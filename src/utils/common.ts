@@ -1,10 +1,16 @@
-import { DARK, LIGHT } from '@/constants'
+import { MOBILE, TABLET, DESKTOP, DARK, LIGHT } from '@/constants'
+import { between } from './lodash'
 
 interface ICSSVarOptions {
   element: HTMLElement
 }
 
-const HTMLBody = document.body
+const HTMLBody: HTMLElement = document.body
+const deviceOptions: { [key: string]: number[] } = {
+  [MOBILE]: [0, 576],
+  [TABLET]: [576, 1200],
+  [DESKTOP]: [1200, Infinity]
+}
 
 export const optionalChaining = (
   obj: { [key: string]: any },
@@ -32,6 +38,17 @@ export const getOSTheme = (cb?: Function): string => {
     lightMql.addEventListener('change', handleLightMqlChange)
   }
   return darkMql.matches ? DARK : LIGHT
+}
+
+export const getDevice = (cb?: Function): string => {
+  const width = document.body.clientWidth
+  const device = Object.keys(deviceOptions).find((key: string) => {
+    return between(width, deviceOptions[key])
+  })
+  if (cb) {
+    window.onresize = () => cb(getDevice())
+  }
+  return device || ''
 }
 
 export const setCSSVar = (
