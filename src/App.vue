@@ -4,8 +4,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useProvide } from '@/utils/provider'
-import store, { IModule } from '@/store'
+import { useProvide, IModule } from '@/utils/provider'
+import store from '@/store'
 
 export default defineComponent({
   name: 'App',
