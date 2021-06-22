@@ -4,10 +4,6 @@ interface IFilterModules {
   [key: string]: (...args: any) => string | void
 }
 
-interface IFilters extends IFilterModules {
-  install: (app: App<Element>) => void
-}
-
 const modules: IFilterModules = {}
 const modulesFiles = import.meta.globEager('./modules/*.ts')
 
@@ -16,11 +12,8 @@ Object.keys(modulesFiles).forEach((modulePath) => {
   modules[moduleName] = modulesFiles[modulePath].default
 })
 
-const filters: IFilters = {
+export default {
   install(app: App<Element>) {
-    app.config.globalProperties.$filters = filters
-  },
-  ...modules
+    app.config.globalProperties.$filters = modules
+  }
 }
-
-export default filters
