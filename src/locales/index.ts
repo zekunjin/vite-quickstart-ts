@@ -47,7 +47,7 @@ export class I18n {
       if (customOptions) {
         Object.keys(customOptions).forEach((key) => {
           const value = customOptions[key]
-          message = message.replaceAll(`{${key}}`, value)
+          message = message && message.replaceAll(`{${key}}`, value)
         })
       }
       return message
