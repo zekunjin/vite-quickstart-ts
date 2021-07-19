@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 import { IState, IActions, IModule } from '@/utils/provider'
-import LocalAuthService from '@/services/local/auth'
+import AuthService from '@/services/auth.service'
 
 export interface IUserState extends IState {
   username: string
@@ -22,14 +22,14 @@ export default (): IModule<IUserState, IUserActions> => {
     login(): Promise<void> {
       return new Promise((resolve, reject) => {
         state.username = 'AFTER LOGIN USERNAME'
-        LocalAuthService.setToken('TOKEN')
+        AuthService.setToken('TOKEN')
         resolve()
       })
     },
 
     logout() {
       state.username = 'AFTER LOGOUT USERNAME'
-      LocalAuthService.removeToken()
+      AuthService.removeToken()
     }
   }
 

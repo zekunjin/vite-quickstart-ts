@@ -1,6 +1,6 @@
 import axios from 'axios'
-import LocalAuthService from '@/services/local/auth'
-import { ACCESS_TOKEN } from '@/constants'
+import AuthService from '@/services/auth.service'
+import { Storage } from '@/constants'
 
 interface IAxiosResponseError {
   response: {
@@ -30,9 +30,9 @@ const err = (error: IAxiosResponseError) => {
 
 service.interceptors.request.use(
   (config) => {
-    const token: string = LocalAuthService.getToken()
+    const token: string = AuthService.getToken()
     if (token) {
-      config.headers[ACCESS_TOKEN] = token
+      config.headers[Storage.ACCESS_TOKEN] = token
     }
     return config
   },

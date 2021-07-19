@@ -1,4 +1,6 @@
 import request from '@/utils/request'
+import ls from '@/utils/storage'
+import { Storage } from '@/constants'
 import { Token } from '@/decorators/auth'
 import { Cache } from '@/decorators/ajax'
 
@@ -9,7 +11,7 @@ export interface ILoginParams {
   password: string
 }
 
-export default class AjaxAuthService {
+export default class AuthService {
   @Token
   @Cache()
   static login(data: ILoginParams) {
@@ -18,5 +20,17 @@ export default class AjaxAuthService {
       method: 'get',
       params: data
     })
+  }
+
+  static getToken(): string {
+    return ls.get(Storage.ACCESS_TOKEN)
+  }
+
+  static setToken(token: string): void {
+    ls.set(Storage.ACCESS_TOKEN, token)
+  }
+
+  static removeToken(): void {
+    ls.remove(Storage.ACCESS_TOKEN)
   }
 }

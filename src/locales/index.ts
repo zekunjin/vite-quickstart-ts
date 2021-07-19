@@ -1,7 +1,7 @@
 import { App, Ref, ref } from 'vue'
 import { optionalChaining } from '@/utils/common'
-import { ZH_CN, EN_US } from '@/constants'
-import LocalConfigService from '@/services/local/app'
+import { Locale } from '@/constants'
+import StorageService from '@/services/storage.service'
 import zhCN from './lang/zh-CN'
 import enUS from './lang/en-US'
 
@@ -19,11 +19,11 @@ export interface ICustomMessages {
 }
 
 const messages: ILocaleMessages = {
-  [ZH_CN]: { ...zhCN },
-  [EN_US]: { ...enUS }
+  [Locale.ZH_CN]: { ...zhCN },
+  [Locale.EN_US]: { ...enUS }
 }
 
-const defaultLang = LocalConfigService.getLanguage() || EN_US
+const defaultLang = StorageService.getLanguage() || Locale.EN_US
 
 export class I18n {
   public locale: Ref<string> = ref('')

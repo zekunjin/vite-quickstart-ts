@@ -2,8 +2,8 @@ import { reactive } from 'vue'
 import i18n from '@/locales'
 import { IState, IActions, IModule } from '@/utils/provider'
 import { getOSTheme, getCSSVar, getDevice } from '@/utils/common'
-import LocalAppService from '@/services/local/app'
-import { ZH_CN, BLUE } from '@/constants/index'
+import StorageService from '@/services/storage.service'
+import { Locale, Color } from '@/constants/index'
 
 export interface IAppState extends IState {
   language: string
@@ -18,21 +18,21 @@ export interface IAppActions extends IActions {
 
 export default (): IModule<IAppState, IAppActions> => {
   const state = reactive({
-    language: ZH_CN,
+    language: Locale.ZH_CN,
     device: getDevice((e: string) => (state.device = e)),
     colorScheme: getOSTheme((e: string) => (state.colorScheme = e)),
-    primaryColor: LocalAppService.getPrimaryColor() || getCSSVar(BLUE)
+    primaryColor: StorageService.getPrimaryColor() || getCSSVar(Color.BLUE)
   })
 
   const actions = {
     setLanguage(language: string): void {
-      LocalAppService.setLanguage(language)
+      StorageService.setLanguage(language)
       i18n.setLocale(language)
       state.language = language
     },
 
     setPrimaryColor(color: string) {
-      LocalAppService.setPrimaryColor(color)
+      StorageService.setPrimaryColor(color)
       state.primaryColor = color
     }
   }

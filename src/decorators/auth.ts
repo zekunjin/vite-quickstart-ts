@@ -1,4 +1,4 @@
-import LocalAuthService from '@/services/local/auth'
+import AuthService from '@/services/auth.service'
 
 export const Token = (
   target: any,
@@ -7,6 +7,6 @@ export const Token = (
 ) => {
   const func = descriptor.value
   descriptor.value = (...args: any[]) =>
-    LocalAuthService.getToken() ? func(...args) : Promise.reject()
+    AuthService.getToken() ? func(...args) : Promise.reject()
   return descriptor
 }

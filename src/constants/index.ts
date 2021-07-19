@@ -1,26 +1,7 @@
-export const ACCESS_TOKEN = 'Access-Token'
+import Storage from './modules/storage'
+import Display from './modules/display'
+import Locale from './modules/locale'
+import Color from './modules/color'
+import Theme from './modules/theme'
 
-export const DESKTOP = 'desktop'
-export const TABLET = 'tablet'
-export const MOBILE = 'mobile'
-
-export const LANGUAGE = 'language'
-export const ZH_CN = 'zh-CN'
-export const EN_US = 'en-US'
-
-export const DARK = 'dark'
-export const LIGHT = 'light'
-
-export const PRIMARY_COLOR = 'primary-color'
-export const BLUE = 'blue'
-export const INDIGO = 'indigo'
-export const PURPLE = 'purple'
-export const PINK = 'pink'
-export const RED = 'red'
-export const ORANGE = 'orange'
-export const YELLOW = 'yellow'
-export const GREEN = 'green'
-export const TEAL = 'teal'
-export const CYAN = 'cyan'
-export const WHITE = 'white'
-export const GREY = 'gray'
+export { Storage, Display, Locale, Color, Theme }

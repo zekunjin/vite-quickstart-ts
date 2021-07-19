@@ -23,8 +23,8 @@
   <button @click="login">login</button>
   <button @click="userActions.login()">set token</button>
   <button @click="userActions.logout()">logout</button>
-  <button @click="appActions.setLanguage(EN_US)">set en-us lang</button>
-  <button @click="appActions.setLanguage(ZH_CN)">set zh-cn lang</button>
+  <button @click="appActions.setLanguage(Locale.EN_US)">set en-us lang</button>
+  <button @click="appActions.setLanguage(Locale.ZH_CN)">set zh-cn lang</button>
 
   <div>{{ $t('message', { msg: 'i18n' }) }}</div>
 </template>
@@ -34,8 +34,8 @@ import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useInject } from '@/utils/provider'
 import store from '@/store'
-import AjaxAuthService from '@/services/ajax/auth'
-import { EN_US, ZH_CN } from '@/constants'
+import AuthService from '@/services/auth.service'
+import { Locale } from '@/constants'
 import colors from '@/core/theme/colors'
 
 export default defineComponent({
@@ -48,7 +48,7 @@ export default defineComponent({
     const { state: appState, actions: appActions } = useInject(store.app)
 
     const login = () => {
-      AjaxAuthService.login({
+      AuthService.login({
         username: 'USERNAME',
         password: 'PASSWORD'
       }).then(({ data }) => {
@@ -61,8 +61,7 @@ export default defineComponent({
     }
 
     return {
-      EN_US,
-      ZH_CN,
+      Locale,
       routeName,
       userState,
       appState,

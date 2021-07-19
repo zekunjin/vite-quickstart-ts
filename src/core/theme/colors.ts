@@ -1,16 +1,16 @@
-import * as COLOR from '@/constants'
+import { Color } from '@/constants'
 
 export default {
-  [COLOR.BLUE]: '#007bff',
-  [COLOR.INDIGO]: '#6610f2',
-  [COLOR.PURPLE]: '#6d49cb',
-  [COLOR.PINK]: '#e83e8c',
-  [COLOR.RED]: '#dc3545',
-  [COLOR.ORANGE]: '#fd7e14',
-  [COLOR.YELLOW]: '#ffc107',
-  [COLOR.GREEN]: '#28a745',
-  [COLOR.TEAL]: '#20c997',
-  [COLOR.CYAN]: '#17a2b8',
-  [COLOR.WHITE]: '#fff',
-  [COLOR.GREY]: '#5e5e5e'
+  [Color.BLUE]: '#007bff',
+  [Color.INDIGO]: '#6610f2',
+  [Color.PURPLE]: '#6d49cb',
+  [Color.PINK]: '#e83e8c',
+  [Color.RED]: '#dc3545',
+  [Color.ORANGE]: '#fd7e14',
+  [Color.YELLOW]: '#ffc107',
+  [Color.GREEN]: '#28a745',
+  [Color.TEAL]: '#20c997',
+  [Color.CYAN]: '#17a2b8',
+  [Color.WHITE]: '#fff',
+  [Color.GREY]: '#5e5e5e'
 } as { [key: string]: string }

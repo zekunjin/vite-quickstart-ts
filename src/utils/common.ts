@@ -1,4 +1,4 @@
-import { MOBILE, TABLET, DESKTOP, DARK, LIGHT } from '@/constants'
+import { Display, Theme } from '@/constants'
 import { between } from './lodash'
 
 interface ICSSVarOptions {
@@ -7,9 +7,9 @@ interface ICSSVarOptions {
 
 const HTMLBody: HTMLElement = document.body
 const deviceOptions: { [key: string]: number[] } = {
-  [MOBILE]: [0, 576],
-  [TABLET]: [576, 1200],
-  [DESKTOP]: [1200, Infinity]
+  [Display.MOBILE]: [0, 576],
+  [Display.TABLET]: [576, 1200],
+  [Display.DESKTOP]: [1200, Infinity]
 }
 
 export const optionalChaining = (
@@ -28,16 +28,16 @@ export const getOSTheme = (cb?: Function): string => {
   const darkMql = window.matchMedia('(prefers-color-scheme: dark)')
   const lightMql = window.matchMedia('(prefers-color-scheme: light)')
   const handleDarkMqlChange = (e: MediaQueryListEvent) => {
-    if (e.matches) cb && cb(DARK)
+    if (e.matches) cb && cb(Theme.DARK)
   }
   const handleLightMqlChange = (e: MediaQueryListEvent) => {
-    if (e.matches) cb && cb(LIGHT)
+    if (e.matches) cb && cb(Theme.LIGHT)
   }
   if (cb && darkMql.addEventListener) {
     darkMql.addEventListener('change', handleDarkMqlChange)
     lightMql.addEventListener('change', handleLightMqlChange)
   }
-  return darkMql.matches ? DARK : LIGHT
+  return darkMql.matches ? Theme.DARK : Theme.LIGHT
 }
 
 export const getDevice = (cb?: Function): string => {
