@@ -3,7 +3,7 @@
     <router-view />
   </keep-alive>
 
-  <router-view />
+  <router-view v-else />
 </template>
 
 <script lang="ts">
