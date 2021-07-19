@@ -34,7 +34,7 @@ import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useInject } from '@/utils/provider'
 import store from '@/store'
-import AuthService from '@/services/auth.service'
+import AuthInteractor from '@/interactors/auth.interactor'
 import { Locale } from '@/constants'
 import colors from '@/core/theme/colors'
 
@@ -47,12 +47,10 @@ export default defineComponent({
     const { state: userState, actions: userActions } = useInject(store.user)
     const { state: appState, actions: appActions } = useInject(store.app)
 
-    const login = () => {
-      AuthService.login({
+    const login = async () => {
+      await AuthInteractor.login({
         username: 'USERNAME',
         password: 'PASSWORD'
-      }).then(({ data }) => {
-        console.log(data)
       })
     }
 

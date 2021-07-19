@@ -9,7 +9,6 @@ export interface IUserState extends IState {
 }
 
 export interface IUserActions extends IActions {
-  login: () => Promise<void>
   logout: () => void
 }
 
@@ -19,14 +18,6 @@ export default (): IModule<IUserState, IUserActions> => {
   })
 
   const actions = {
-    login(): Promise<void> {
-      return new Promise((resolve, reject) => {
-        state.username = 'AFTER LOGIN USERNAME'
-        AuthService.setToken('TOKEN')
-        resolve()
-      })
-    },
-
     logout() {
       state.username = 'AFTER LOGOUT USERNAME'
       AuthService.removeToken()
