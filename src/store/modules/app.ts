@@ -16,12 +16,16 @@ export interface IAppActions extends IActions {
   setLanguage: (locale: string) => void
 }
 
+const defaultColor = getCSSVar(Color.BLUE, {
+  element: document.documentElement
+})
+
 export default (): IModule<IAppState, IAppActions> => {
   const state = reactive({
     language: Locale.ZH_CN,
     device: getDevice((e: string) => (state.device = e)),
     colorScheme: getOSTheme((e: string) => (state.colorScheme = e)),
-    primaryColor: StorageService.getPrimaryColor() || getCSSVar(Color.BLUE)
+    primaryColor: StorageService.getPrimaryColor() || defaultColor
   })
 
   const actions = {
