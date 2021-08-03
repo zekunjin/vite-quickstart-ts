@@ -3,7 +3,7 @@ import i18n from '@/locales'
 import { IState, IActions, IModule } from '@/utils/provider'
 import { getOSTheme, getCSSVar, getDevice } from '@/utils/common'
 import StorageService from '@/services/storage.service'
-import { Locale, Color } from '@/constants/index'
+import { Locale, Color } from '@/constants'
 
 export interface IAppState extends IState {
   language: string

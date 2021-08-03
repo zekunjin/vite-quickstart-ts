@@ -1,4 +1,3 @@
-import { Ref } from 'vue'
 import AuthService, { ILoginParams } from '@/services/auth.service'
 
 export default class AuthInteractor {
@@ -8,9 +7,8 @@ export default class AuthInteractor {
 
   constructor() {}
 
-  static async login(params: ILoginParams, dom?: Ref) {
+  static async login(params: ILoginParams) {
     try {
-      dom && (await dom.value.validate())
       const { data } = await AuthService.login(params)
       return data.token
     } catch (err) {

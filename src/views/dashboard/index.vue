@@ -21,7 +21,7 @@
   </div>
 
   <button @click="login">login</button>
-  <button @click="userActions.login()">set token</button>
+  <button @click="setToken()">set token</button>
   <button @click="userActions.logout()">logout</button>
   <button @click="appActions.setLanguage(Locale.EN_US)">set en-us lang</button>
   <button @click="appActions.setLanguage(Locale.ZH_CN)">set zh-cn lang</button>
@@ -35,6 +35,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useInject } from '@/utils/provider'
 import store from '@/store'
 import AuthInteractor from '@/interactors/auth.interactor'
+import AuthService from '@/services/auth.service'
 import { Locale } from '@/constants'
 import colors from '@/core/theme/colors'
 
@@ -44,7 +45,7 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const { name: routeName } = useRoute()
-    const { state: userState, actions: userActions } = useInject(store.user)
+    const { state: userState } = useInject(store.user)
     const { state: appState, actions: appActions } = useInject(store.app)
 
     const login = async () => {
@@ -52,6 +53,10 @@ export default defineComponent({
         username: 'USERNAME',
         password: 'PASSWORD'
       })
+    }
+
+    const setToken = () => {
+      AuthService.setToken('TOKEN')
     }
 
     const naviAccount = () => {
@@ -63,10 +68,10 @@ export default defineComponent({
       routeName,
       userState,
       appState,
-      userActions,
       appActions,
       colors,
       login,
+      setToken,
       naviAccount
     }
   }
