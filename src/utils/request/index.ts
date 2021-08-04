@@ -4,12 +4,14 @@ import { invalidateToken } from './interceptors/response/auth.interceptor'
 import { setNotification } from './interceptors/response/notification.interceptor'
 
 export interface IInterceptor {
-  request: ((config: AxiosRequestConfig) => AxiosRequestConfig)[]
+  request: ((
+    config: AxiosRequestConfig
+  ) => AxiosRequestConfig | Promise<AxiosRequestConfig>)[]
   response: ((error: any) => void)[]
 }
 
 export interface IResponseError {
-  status: string
+  status: number
   data: any
   [key: string]: any
 }
@@ -71,9 +73,10 @@ const vueAxios = new VueAxios({
   timeout: 6000
 })
 
-vueAxios.useRequestInterceptor(setToken)
-vueAxios.useResponseInterceptor(invalidateToken)
-vueAxios.useResponseInterceptor(setNotification)
-vueAxios.end()
+vueAxios
+  .useRequestInterceptor(setToken)
+  .useResponseInterceptor(invalidateToken)
+  .useResponseInterceptor(setNotification)
+  .end()
 
 export default vueAxios.service

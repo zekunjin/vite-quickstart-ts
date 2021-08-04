@@ -1,3 +1,3 @@
 export default {
-  INVALIDATE_TOKEN: 'INVALIDATE_TOKEN'
+  INVALIDATE_TOKEN: 'Invalidate token'
 }
