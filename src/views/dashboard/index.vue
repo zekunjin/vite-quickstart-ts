@@ -4,7 +4,7 @@
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
-  <div>date format: {{ $filters.moment('2020.01.01') }}</div>
+  <!-- <div>date format: {{ $filters.moment('2020.01.01') }}</div> -->
   <div>color scheme: {{ appState.colorScheme }}</div>
   <div class="primary-color">
     <span>primary color</span>
@@ -22,11 +22,10 @@
 
   <button @click="login">login</button>
   <button @click="setToken()">set token</button>
-  <button @click="userActions.logout()">logout</button>
   <button @click="appActions.setLanguage(Locale.EN_US)">set en-us lang</button>
   <button @click="appActions.setLanguage(Locale.ZH_CN)">set zh-cn lang</button>
 
-  <div>{{ $t('message', { msg: 'i18n' }) }}</div>
+  <!-- <div>{{ $t('message', { msg: 'i18n' }) }}</div> -->
 </template>
 
 <script lang="ts">

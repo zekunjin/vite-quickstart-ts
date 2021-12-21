@@ -1,4 +1,5 @@
-import app from './modules/app'
-import user from './modules/user'
+import { createStore } from 'vuex'
 
-export default { app, user }
+const store = createStore({ modules: {} })
+
+export default store

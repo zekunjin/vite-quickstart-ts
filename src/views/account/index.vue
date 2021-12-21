@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import validate from '@/utils/validate'
+// import validate from '@/utils/validate'
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default defineComponent({
@@ -21,17 +21,17 @@ export default defineComponent({
 
   setup() {
     onMounted(() => {
-      validate({
-        name: [{ required: true, message: 'required error message' }]
-      })({
-        name: ''
-      })
-        .then((res) => {
-          console.log(`validate: ${res}`)
-        })
-        .catch((err) => {
-          console.log(`invalidate: ${err}`)
-        })
+      // validate({
+      //   name: [{ required: true, message: 'required error message' }]
+      // })({
+      //   name: ''
+      // })
+      //   .then((res) => {
+      //     console.log(`validate: ${res}`)
+      //   })
+      //   .catch((err) => {
+      //     console.log(`invalidate: ${err}`)
+      //   })
     })
   }
 })
