@@ -1,4 +1,4 @@
-interface IDate {
+interface IDateTime {
   year: number
   month: number
   day: number
@@ -17,12 +17,12 @@ const pad = (str: string | number, length: number = 2) => {
 }
 
 const parser: { [func: string]: Function } = {
-  YYYY: (target: IDate) => pad(target.year, 4),
-  MM: (target: IDate) => pad(target.month),
-  DD: (target: IDate) => pad(target.day),
-  hh: (target: IDate) => pad(target.hour),
-  mm: (target: IDate) => pad(target.minute),
-  ss: (target: IDate) => pad(target.second)
+  YYYY: (target: IDateTime) => pad(target.year, 4),
+  MM: (target: IDateTime) => pad(target.month),
+  DD: (target: IDateTime) => pad(target.day),
+  hh: (target: IDateTime) => pad(target.hour),
+  mm: (target: IDateTime) => pad(target.minute),
+  ss: (target: IDateTime) => pad(target.second)
 }
 
 export default (value: string, format: string = 'YYYY/MM/DD hh:mm:ss') => {
@@ -30,7 +30,7 @@ export default (value: string, format: string = 'YYYY/MM/DD hh:mm:ss') => {
   let result = format
   const tokenRegExp = /YYYY|MM|DD|hh|mm|ss/
   const date = new Date(value)
-  const target: IDate = {
+  const target: IDateTime = {
     year: date.getFullYear(),
     month: date.getMonth() + 1,
     day: date.getDate(),

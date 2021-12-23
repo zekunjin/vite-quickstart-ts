@@ -1,16 +1,16 @@
 <template>
-  <div>user state: {{ userState }}</div>
-  <div>app state: {{ appState }}</div>
+  <div>user state: {{ state.user }}</div>
+  <div>app state: {{ state.app }}</div>
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
   <!-- <div>date format: {{ $filters.moment('2020.01.01') }}</div> -->
-  <div>color scheme: {{ appState.colorScheme }}</div>
+  <div>color scheme: {{ state.app.colorScheme }}</div>
   <div class="primary-color">
     <span>primary color</span>
   </div>
 
-  <div>
+  <!-- <div>
     <div
       v-for="item in colors"
       :key="item"
@@ -18,12 +18,16 @@
       :style="{ backgroundColor: item }"
       @click="appActions.setPrimaryColor(item)"
     />
-  </div>
+  </div> -->
 
   <button @click="login">login</button>
   <button @click="setToken()">set token</button>
-  <button @click="appActions.setLanguage(Locale.EN_US)">set en-us lang</button>
-  <button @click="appActions.setLanguage(Locale.ZH_CN)">set zh-cn lang</button>
+  <button @click="store.app.dispatch('setLanguage', Locale.EN_US)">
+    set en-us lang
+  </button>
+  <button @click="store.app.dispatch('setLanguage', Locale.EN_US)">
+    set zh-cn lang
+  </button>
 
   <!-- <div>{{ $t('message', { msg: 'i18n' }) }}</div> -->
 </template>
@@ -31,8 +35,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useInject } from '@/utils/provider'
-import store from '@/store'
+import { useStore } from '@/store'
 import AuthInteractor from '@/interactors/auth.interactor'
 import AuthService from '@/services/auth.service'
 import { Locale } from '@/constants'
@@ -43,9 +46,8 @@ export default defineComponent({
 
   setup() {
     const router = useRouter()
+    const store = useStore()
     const { name: routeName } = useRoute()
-    const { state: userState } = useInject(store.user)
-    const { state: appState, actions: appActions } = useInject(store.app)
 
     const login = async () => {
       await AuthInteractor.login({
@@ -65,9 +67,7 @@ export default defineComponent({
     return {
       Locale,
       routeName,
-      userState,
-      appState,
-      appActions,
+      store,
       colors,
       login,
       setToken,

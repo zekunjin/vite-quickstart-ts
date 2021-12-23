@@ -1,10 +1,10 @@
 import { App } from 'vue'
 
-interface IFilterModules {
+interface FilterModules {
   [key: string]: (...args: any) => string | void
 }
 
-const modules: IFilterModules = {}
+const modules: FilterModules = {}
 const modulesFiles = import.meta.globEager('./modules/*.ts')
 
 Object.keys(modulesFiles).forEach((modulePath) => {

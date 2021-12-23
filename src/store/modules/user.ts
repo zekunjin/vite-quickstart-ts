@@ -1,31 +1,34 @@
-import { reactive } from 'vue'
-import { IState, IActions, IModule } from '@/utils/provider'
+import { Module } from 'vuex'
+import { RootState } from '@/store'
 import AuthService from '@/services/auth.service'
 
-export interface IUserState extends IState {
+export interface IUserState {
   username: string
-  avatar?: string
-  mobile?: string
+  avatar: string
+  mobile: string
 }
 
-export interface IUserActions extends IActions {
-  logout: () => void
-}
+const user: Module<IUserState, RootState> = {
+  namespaced: true,
 
-export default (): IModule<IUserState, IUserActions> => {
-  const state = reactive({
-    username: 'DEFAULT'
-  })
+  state: () => ({
+    username: '',
+    avatar: '',
+    mobile: ''
+  }),
 
-  const actions = {
-    logout() {
-      state.username = 'AFTER LOGOUT USERNAME'
+  mutations: {
+    SET_USERNAME(state, username = '') {
+      state.username = username
+    }
+  },
+
+  actions: {
+    logout({ commit }) {
+      commit('SET_USERNAME')
       AuthService.removeToken()
     }
   }
-
-  return {
-    state,
-    actions
-  }
 }
+
+export default user
