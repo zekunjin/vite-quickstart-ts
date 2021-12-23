@@ -8,5 +8,9 @@ export default defineConfig({
     alias: {
       '@': require('path').resolve(__dirname, './src')
     }
+  },
+
+  server: {
+    port: 8080
   }
 })

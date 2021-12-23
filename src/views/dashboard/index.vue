@@ -1,35 +1,35 @@
 <template>
-  <div>user state: {{ state.user }}</div>
-  <div>app state: {{ state.app }}</div>
+  <div>user state: {{ store.state.user }}</div>
+  <div>app state: {{ store.state.app }}</div>
   <div>current route: {{ routeName }}</div>
   <router-link :to="{ name: 'account' }">router link account</router-link>
   <div @click="naviAccount">javascript link account</div>
   <!-- <div>date format: {{ $filters.moment('2020.01.01') }}</div> -->
-  <div>color scheme: {{ state.app.colorScheme }}</div>
+  <div>color scheme: {{ store.state.app.colorScheme }}</div>
   <div class="primary-color">
     <span>primary color</span>
   </div>
 
-  <!-- <div>
+  <div>
     <div
       v-for="item in colors"
       :key="item"
       class="color-select-block"
       :style="{ backgroundColor: item }"
-      @click="appActions.setPrimaryColor(item)"
+      @click="store.dispatch('app/setPrimaryColor', item)"
     />
-  </div> -->
+  </div>
 
   <button @click="login">login</button>
   <button @click="setToken()">set token</button>
-  <button @click="store.app.dispatch('setLanguage', Locale.EN_US)">
+  <button @click="store.dispatch('app/setLanguage', Locale.EN_US)">
     set en-us lang
   </button>
-  <button @click="store.app.dispatch('setLanguage', Locale.EN_US)">
+  <button @click="store.dispatch('app/setLanguage', Locale.ZH_CN)">
     set zh-cn lang
   </button>
 
-  <!-- <div>{{ $t('message', { msg: 'i18n' }) }}</div> -->
+  <div>{{ $t('message', { msg: 'i18n' }) }}</div>
 </template>
 
 <script lang="ts">
