@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 import ls from '@/utils/storage'
 import { Storage } from '@/constants'
-import { Token } from '@/decorators/auth'
-import { Cache } from '@/decorators/ajax'
+import Token from '@/decorators/token.decorator'
+import Cache from '@/decorators/cache.decorator'
 
 export const LOGIN = '/shuffling/list'
 

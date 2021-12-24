@@ -1,15 +1,17 @@
-import AuthService from '@/services/auth.service'
-import { Log } from '@/constants'
+import ls from '@/utils/storage'
+import { Log, Storage } from '@/constants'
 
-export const Token = (
+const Token = (
   target: any,
   propertyKey: string,
   descriptor: PropertyDescriptor
 ) => {
   const func = descriptor.value
   descriptor.value = (...args: any[]) =>
-    AuthService.getToken()
+    ls.get(Storage.ACCESS_TOKEN)
       ? func(...args)
       : Promise.reject(Log.INVALIDATE_TOKEN)
   return descriptor
 }
+
+export default Token

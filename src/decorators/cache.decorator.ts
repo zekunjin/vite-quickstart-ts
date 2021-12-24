@@ -10,7 +10,7 @@ export interface IRequestOptions {
 
 const dataCache = new Map<string, ICacheItem>()
 
-export const Cache =
+const Cache =
   (timeout: number = 1000 * 60) =>
   (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const func: Function = descriptor.value
@@ -41,3 +41,5 @@ export const Cache =
     }
     return descriptor
   }
+
+export default Cache

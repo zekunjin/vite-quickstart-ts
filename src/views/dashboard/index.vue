@@ -1,4 +1,5 @@
 <template>
+  <button @click="interactor.auth.login()">interactor</button>
   <div>user state: {{ store.state.user }}</div>
   <div>app state: {{ store.state.app }}</div>
   <div>current route: {{ routeName }}</div>
@@ -33,18 +34,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from '@/store'
 import AuthInteractor from '@/interactors/auth.interactor'
 import AuthService from '@/services/auth.service'
 import { Locale } from '@/constants'
 import colors from '@/core/theme/colors'
+import dashboardInteractor from './dashboard.interactor'
 
 export default defineComponent({
   name: 'dashboard',
 
   setup() {
+    const interactor = reactive(dashboardInteractor)
     const router = useRouter()
     const store = useStore()
     const { name: routeName } = useRoute()
@@ -66,6 +69,7 @@ export default defineComponent({
 
     return {
       Locale,
+      interactor,
       routeName,
       store,
       colors,
