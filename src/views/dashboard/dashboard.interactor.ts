@@ -1,12 +1,10 @@
-import AuthService from '@/modules/auth/auth.service'
+import Metadata from '@/decorators/metadata.decorator'
+import { createInstance } from '@/utils/metadata'
 import AuthController from '@/modules/auth/auth.controller'
 
+@Metadata.Paramtypes(AuthController)
 class DashboardInteractor {
   constructor(public auth: AuthController) {}
 }
 
-const authService = new AuthService()
-const authController = new AuthController(authService)
-const dashboardInteractor = new DashboardInteractor(authController)
-
-export default dashboardInteractor
+export default createInstance(DashboardInteractor)

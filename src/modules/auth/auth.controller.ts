@@ -1,5 +1,7 @@
+import Metadata from '@/decorators/metadata.decorator'
 import AuthService from './auth.service'
 
+@Metadata.Paramtypes(AuthService)
 class AuthController {
   constructor(private readonly authService: AuthService) {}
 

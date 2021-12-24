@@ -5,6 +5,7 @@ import AppService from '@/modules/app/app.service'
 import AppController from '@/modules/app/app.controller'
 import zhCN from './lang/zh-CN'
 import enUS from './lang/en-US'
+import { createInstance } from '@/utils/metadata'
 
 export interface ILocaleMessages {
   [key: string]: string | ILocaleMessages
@@ -19,15 +20,12 @@ export interface ICustomMessages {
   [key: string]: string
 }
 
-const appService = new AppService()
-const appController = new AppController(appService)
-
 const messages: ILocaleMessages = {
   [Locale.ZH_CN]: { ...zhCN },
   [Locale.EN_US]: { ...enUS }
 }
 
-const defaultLang = appController.language || Locale.EN_US
+const defaultLang = createInstance(AppController).language || Locale.EN_US
 
 export class I18n {
   public locale: Ref<string> = ref('')
