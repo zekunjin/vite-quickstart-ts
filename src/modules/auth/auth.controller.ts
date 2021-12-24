@@ -7,6 +7,14 @@ class AuthController {
     this.authService.login({ username, password })
   }
 
+  getToken() {
+    return this.authService.getToken()
+  }
+
+  setToken(token: string = '') {
+    this.authService.setToken(token)
+  }
+
   logout() {}
 }
 

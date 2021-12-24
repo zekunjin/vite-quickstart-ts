@@ -37,8 +37,6 @@
 import { defineComponent, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from '@/store'
-import AuthInteractor from '@/interactors/auth.interactor'
-import AuthService from '@/services/auth.service'
 import { Locale } from '@/constants'
 import colors from '@/core/theme/colors'
 import dashboardInteractor from './dashboard.interactor'
@@ -53,14 +51,11 @@ export default defineComponent({
     const { name: routeName } = useRoute()
 
     const login = async () => {
-      await AuthInteractor.login({
-        username: 'USERNAME',
-        password: 'PASSWORD'
-      })
+      await interactor.auth.login('USERNAME', 'PASSWORD')
     }
 
     const setToken = () => {
-      AuthService.setToken('TOKEN')
+      interactor.auth.setToken('TOKEN')
     }
 
     const naviAccount = () => {

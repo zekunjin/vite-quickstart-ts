@@ -3,7 +3,8 @@ import { RootState } from '@/store'
 import i18n from '@/locales'
 import { Locale, Color } from '@/constants'
 import { getOSTheme, getCSSVar, getDevice } from '@/utils/common'
-import StorageService from '@/services/storage.service'
+import AppService from '@/modules/app/app.service'
+import AppController from '@/modules/app/app.controller'
 
 export interface IAppState {
   language: string
@@ -11,6 +12,9 @@ export interface IAppState {
   colorScheme: string
   primaryColor: string
 }
+
+const appService = new AppService()
+const appController = new AppController(appService)
 
 const app: Module<IAppState, RootState> = {
   namespaced: true,
@@ -20,7 +24,7 @@ const app: Module<IAppState, RootState> = {
     device: getDevice(),
     colorScheme: getOSTheme(),
     primaryColor:
-      StorageService.getPrimaryColor() ||
+      appController.primaryColor ||
       getCSSVar(Color.BLUE, {
         element: document.documentElement
       })
@@ -38,13 +42,13 @@ const app: Module<IAppState, RootState> = {
 
   actions: {
     setLanguage({ commit }, language: string) {
-      StorageService.setLanguage(language)
+      appController.setLanguage(language)
       i18n.setLocale(language)
       commit('SET_LANGUAGE', language)
     },
 
     setPrimaryColor({ commit }, color: string) {
-      StorageService.setPrimaryColor(color)
+      appController.setPrimaryColor(color)
       commit('SET_PRIMARY_COLOR', color)
     }
   }
