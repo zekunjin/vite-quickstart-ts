@@ -1,13 +1,9 @@
 import { AxiosRequestConfig } from 'axios'
 import { Storage } from '@/constants'
-import AuthService from '@/modules/auth/auth.service'
-import AuthController from '@/modules/auth/auth.controller'
-
-const authService = new AuthService()
-const authController = new AuthController(authService)
+import ls from '@/utils/storage'
 
 export const setToken = (config: AxiosRequestConfig) => {
-  const token: string = authController.getToken()
+  const token: string = ls.get(Storage.ACCESS_TOKEN)
   if (token) {
     config.headers[Storage.ACCESS_TOKEN] = token
   }
