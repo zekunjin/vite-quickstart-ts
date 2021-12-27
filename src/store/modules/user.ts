@@ -1,7 +1,6 @@
 import { Module } from 'vuex'
 import { RootState } from '@/store'
 import AuthService from '@/modules/auth/auth.service'
-import AuthController from '@/modules/auth/auth.controller'
 
 export interface IUserState {
   username: string
@@ -10,7 +9,6 @@ export interface IUserState {
 }
 
 const authService = new AuthService()
-const authController = new AuthController(authService)
 
 const user: Module<IUserState, RootState> = {
   namespaced: true,
@@ -30,7 +28,7 @@ const user: Module<IUserState, RootState> = {
   actions: {
     logout({ commit }) {
       commit('SET_USERNAME')
-      authController.setToken()
+      authService.setToken()
     }
   }
 }

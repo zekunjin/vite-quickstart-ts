@@ -2,7 +2,9 @@ import request from '@/utils/request'
 import ls from '@/utils/storage'
 import { Storage } from '@/constants'
 import { LoginDto } from './dto/login.dto'
+import Singleton from '@/decorators/singleton.decorator'
 
+@Singleton
 class AuthService {
   static LOGIN = ''
 
@@ -18,7 +20,7 @@ class AuthService {
     return ls.get(Storage.ACCESS_TOKEN)
   }
 
-  setToken(token: string): void {
+  setToken(token: string = ''): void {
     ls.set(Storage.ACCESS_TOKEN, token)
   }
 
