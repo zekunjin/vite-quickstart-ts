@@ -6,7 +6,7 @@ import monitor from './monitor'
 export default {
   install(app: App<Element>) {
     filters.install(app)
-    theme.install(app)
+    theme.install()
     monitor.install(app)
   }
 }

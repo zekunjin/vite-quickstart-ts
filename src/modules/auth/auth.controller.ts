@@ -10,11 +10,11 @@ class AuthController {
   }
 
   getToken() {
-    return this.authService.getToken()
+    return this.authService.token
   }
 
   setToken(token: string = '') {
-    this.authService.setToken(token)
+    this.authService.token = token
   }
 
   logout() {}

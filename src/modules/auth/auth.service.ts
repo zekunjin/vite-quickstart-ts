@@ -8,20 +8,20 @@ import Singleton from '@/decorators/singleton.decorator'
 class AuthService {
   static LOGIN = ''
 
+  get token() {
+    return ls.get(Storage.ACCESS_TOKEN)
+  }
+
+  set token(token: string) {
+    ls.set(Storage.ACCESS_TOKEN, token)
+  }
+
   login(data: LoginDto) {
     return request({
       url: AuthService.LOGIN,
       method: 'get',
       params: data
     })
-  }
-
-  getToken(): string {
-    return ls.get(Storage.ACCESS_TOKEN)
-  }
-
-  setToken(token: string = ''): void {
-    ls.set(Storage.ACCESS_TOKEN, token)
   }
 
   removeToken(): void {

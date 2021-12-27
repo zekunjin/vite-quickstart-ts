@@ -1,3 +1,5 @@
+import { reactive } from 'vue'
+
 const _providerMap = new Map()
 
 export const useProvide = (target: any, key: string, ...args: any[]) => {
@@ -23,4 +25,11 @@ export const createInstance = <T>(constructor: {
   })
 
   return new constructor(...paramInstances)
+}
+
+export const useAggregate = <T>(constructor: {
+  new (...args: any[]): T
+}): T => {
+  const instance = createInstance(constructor)
+  return reactive(instance as any)
 }

@@ -1,5 +1,5 @@
 <template>
-  <button @click="interactor.auth.login()">interactor</button>
+  <button @click="auth.login()">interactor</button>
   <div>user state: {{ store.state.user }}</div>
   <div>app state: {{ store.state.app }}</div>
   <div>current route: {{ routeName }}</div>
@@ -34,28 +34,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from '@/store'
 import { Locale } from '@/constants'
+import { useAggregate } from '@/utils/metadata'
 import colors from '@/core/theme/colors'
-import dashboardInteractor from './dashboard.interactor'
+import Dashboard from './dashboard.aggregate'
 
 export default defineComponent({
   name: 'dashboard',
 
   setup() {
-    const interactor = reactive(dashboardInteractor)
+    const { auth } = useAggregate(Dashboard)
     const router = useRouter()
     const store = useStore()
     const { name: routeName } = useRoute()
 
     const login = async () => {
-      await interactor.auth.login('USERNAME', 'PASSWORD')
+      await auth.login('USERNAME', 'PASSWORD')
     }
 
     const setToken = () => {
-      interactor.auth.setToken('TOKEN')
+      auth.setToken('TOKEN')
     }
 
     const naviAccount = () => {
@@ -64,7 +65,7 @@ export default defineComponent({
 
     return {
       Locale,
-      interactor,
+      auth,
       routeName,
       store,
       colors,
